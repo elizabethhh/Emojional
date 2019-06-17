@@ -19,13 +19,16 @@ class ViewController: UIViewController {
     
     @IBAction func showMessage(sender: UIButton) {
         
-        let emojis = ["🤩": "You're a super star", "🤯": "My mind is blown"]
+        let emojis = ["🤩": "Hey super star", "🤯": "My mind is blown"]
+        let customMessages = ["Hey super star": ["You're shining bright today!", "Don't forget that you're fabulous", "Keep doing you!"], "My mind is blown": ["Want to talk it out?", "You doing OK?", "I know it's confusing. You can do it!"]]
         let alerts = ["OK", "Bye"]
         
         let selectedEmotion = sender.titleLabel?.text
         
-        let alertController = UIAlertController(title: "alert", message: emojis[selectedEmotion!], preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: alerts[0], style: UIAlertAction.Style.default, handler: nil))
+        let emojiMessage = customMessages[emojis[selectedEmotion!]!]?[Int(arc4random_uniform(3))]
+        
+        let alertController = UIAlertController(title: emojis[selectedEmotion!], message: emojiMessage, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: alerts[Int(arc4random_uniform(2))], style: UIAlertAction.Style.default, handler: nil))
         present(alertController, animated: true, completion: nil)
         
     }
